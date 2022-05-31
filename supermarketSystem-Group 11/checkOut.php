@@ -31,12 +31,9 @@ echo'error';
 function getPosts()
 {
 $posts=array();
-$posts[0]=$_POST['ISBN'];
-$posts[1]=$_POST['title'];
-$posts[2]=$_POST['author'];
-$posts[3]=$_POST['edition'];
-
-$posts[5]=$_POST['NoOfCopy'];
+$posts[0]=$_POST['catagory_id'];
+$posts[1]=$_POST['catagory_name'];
+$posts[2]=$_POST['catagory_description'];
 $posts[6]=$_POST['ID'];
 $posts[7]=$_POST['FirstName'];
 $posts[8]=$_POST['LastName'];
@@ -47,7 +44,7 @@ return $posts;
 if(isset($_POST['search']))
 {
 $data=getPosts();
-$search_Query="SELECT * FROM books WHERE ISBN=$data[0]";
+$search_Query="SELECT * FROM books WHERE catagory_id=$data[0]";
 $search_Result=mysqli_query($connect,$search_Query);
 if($search_Result)
 {
@@ -55,9 +52,9 @@ if($search_Result)
 		{
 			while($row=mysqli_fetch_array($search_Result))
 			{
-			$ISBN=$row['ISBN'];
-			$title=$row['title'];
-			$author=$row['author'];
+			$catagory_id=$row['catagory_id'];
+			$catagory_name=$row['catagory_name'];
+			$catagory_description=$row['catagory_description'];
 			$edition=$row['edition'];
 			$price=$row['price'];
 			$NoOfCopy=$row['NoOfCopy'];
@@ -65,7 +62,7 @@ if($search_Result)
 		}
 	else
 	{
-	echo 'no data for this ISBN';
+	echo 'no data for this catagory_id';
 }
 }
 else
